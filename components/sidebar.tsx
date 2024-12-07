@@ -257,16 +257,7 @@ export default function SidebarPage({ children }: { children: ReactNode }) {
       <SidebarProvider>
          <AppSidebar />
          <SidebarInset>
-            <header className="flex h-14 shrink-0 items-center gap-2">
-               <div className="flex flex-1 items-center gap-2 px-3">
-                  <SidebarTrigger />
-
-
-               </div>
-               <div className="ml-auto px-3">
-
-               </div>
-            </header>
+            
             <div className="flex flex-1 flex-col p-4">
                <div className={'flex flex-grow flex-col items-start'}>{children}</div>
             </div>

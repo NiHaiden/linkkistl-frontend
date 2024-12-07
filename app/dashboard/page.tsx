@@ -5,11 +5,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import fetchLinks from '@/lib/data-fetching/fetch-links';
 import { ChartBarIncreasing, Folders, Tags } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { CommandPalette } from '@/components/command-palette';
+import { SidebarTrigger } from '@/components/ui/sidebar';
+import * as React from 'react';
 
 export default async function Page() {
 
    const session = await auth();
-   
+
    if (!session?.user) {
       redirect('/');
    }
@@ -27,7 +30,15 @@ export default async function Page() {
    console.log(data);
    return (
       <SidebarPage>
+         <header className="flex h-fit shrink-0 items-center gap-2">
+            <div className="flex flex-1 items-center gap-2">
+               <SidebarTrigger />
+            </div>
+            <div className="ml-auto px-3">
+            </div>
+         </header>
          <div className={'flex flex-col gap-5 w-full'}>
+            <CommandPalette />
             <div>
                <h1 className={'text-2xl lg:text-4xl font-bold'}>👋 Hi, {session?.user?.name}!</h1>
                <div>This is your dashboard.</div>

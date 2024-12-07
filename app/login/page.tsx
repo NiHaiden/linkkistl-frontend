@@ -3,7 +3,7 @@ import { LoginBtn } from '@/components/login-btn';
 
 export default async function Login() {
    return (
-      <main className={'w-full h-[100dvh] dark:bg-black grid grid-cols-2'}>
+      <main className={'w-full h-[100dvh] dark:bg-black grid grid-cols-1 lg:grid-cols-2'}>
          <div className={'bgimg'} />
          <div className={'flex flex-col justify-center items-center'}>
             <div className={'w-2/3 flex-col flex gap-3'}>
