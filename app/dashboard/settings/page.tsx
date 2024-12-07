@@ -1,5 +1,9 @@
+import SidebarPage from '@/components/sidebar';
+
 export default function Settings() {
    return (
-      <div>Settings</div>
+      <SidebarPage>
+         <div>Settings</div>
+      </SidebarPage>
    );
 }
