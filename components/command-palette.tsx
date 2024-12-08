@@ -15,6 +15,7 @@ import {
   CommandShortcut,
 } from '@/components/ui/command'
 import { AddLinkDialog } from './add-link-dialog'
+import { useRouter } from 'next/navigation';
 
 export function CommandPalette() {
   const [open, setOpen] = React.useState(false)
@@ -38,9 +39,12 @@ export function CommandPalette() {
     setShowAddLink(false)
   }
 
+  const router = useRouter();
+
   return (
     <>
       <CommandDialog open={open} onOpenChange={setOpen} className="w-[400px]">
+
         <CommandInput placeholder="Type a command or search..." />
         <CommandList className="max-h-[300px] overflow-y-auto">
           <CommandEmpty className="py-6 text-center text-sm">
@@ -48,21 +52,13 @@ export function CommandPalette() {
             <p className="text-muted-foreground mt-2">Try a different search term.</p>
           </CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <Calendar className="mr-2 h-4 w-4" />
-              <span>Calendar</span>
-            </CommandItem>
-            <CommandItem>
-              <Smile className="mr-2 h-4 w-4" />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem>
-              <Calculator className="mr-2 h-4 w-4" />
-              <span>Calculator</span>
-            </CommandItem>
             <CommandItem onSelect={() => setShowAddLink(true)}>
               <Link className="mr-2 h-4 w-4" />
               <span>Add New Link</span>
+            </CommandItem>
+            <CommandItem onSelect={()=>  router.push("/dashboard/links")}>
+              <Link className="mr-2 h-4 w-4" />
+              <span>View All Links</span>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />

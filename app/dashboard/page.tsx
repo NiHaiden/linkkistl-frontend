@@ -30,7 +30,7 @@ export default async function Page() {
    console.log(data);
    return (
       <SidebarPage>
-         <header className="flex h-fit shrink-0 items-center gap-2">
+         <header className="flex p-4 h-fit shrink-0 items-center gap-2">
             <div className="flex flex-1 items-center gap-2">
                <SidebarTrigger />
             </div>

@@ -92,19 +92,14 @@ const data = {
          icon: Search,
       },
       {
-         title: 'Ask AI',
-         url: '#',
-         icon: Sparkles,
-      },
-      {
          title: 'Home',
-         url: '#',
+         url: '/dashboard',
          icon: Home,
          isActive: true,
       },
       {
-         title: 'Inbox',
-         url: '#',
+         title: 'Your links',
+         url: '/dashboard/links',
          icon: Inbox,
          badge: '10',
       },
