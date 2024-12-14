@@ -66,6 +66,8 @@ import {
 import { useSession } from 'next-auth/react';
 import { AnimatedSettingsIcon } from '@/components/icons/animated-settings';
 import { ReactNode } from 'react';
+import CommandPaletteButton from '@/components/command-palette-button';
+import { CommandPalette } from '@/components/command-palette';
 // This is sample data.
 const data = {
    teams: [
@@ -86,11 +88,6 @@ const data = {
       },
    ],
    navMain: [
-      {
-         title: 'Search',
-         url: '#',
-         icon: Search,
-      },
       {
          title: 'Home',
          url: '/dashboard',
@@ -360,6 +357,12 @@ function NavMain({
                </SidebarMenuButton>
             </SidebarMenuItem>
          ))}
+         <SidebarMenuItem>
+            <SidebarMenuButton>
+               <Command />
+               <CommandPalette/>
+            </SidebarMenuButton>
+         </SidebarMenuItem>
       </SidebarMenu>
    );
 }

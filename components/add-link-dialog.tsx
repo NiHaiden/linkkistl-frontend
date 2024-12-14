@@ -41,8 +41,6 @@ export function AddLinkDialog({ isOpen, onClose, onSubmit }: AddLinkDialogProps)
    };
 
    const readClipboard = async () => {
-      if (hasReadClipboard.current) return;
-
       try {
          const text = await navigator.clipboard.readText();
          if (isValidUrl(text)) {
@@ -85,7 +83,6 @@ export function AddLinkDialog({ isOpen, onClose, onSubmit }: AddLinkDialogProps)
    return (
       <Dialog open={isOpen} onOpenChange={onClose}>
          <DialogContent className="sm:max-w-[425px]">
-            <jhbguh
             <DialogHeader>
                <DialogTitle>Add New Link</DialogTitle>
             </DialogHeader>

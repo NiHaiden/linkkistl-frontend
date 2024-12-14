@@ -38,7 +38,6 @@ export default async function Page() {
             </div>
          </header>
          <div className={'flex flex-col gap-5 w-full'}>
-            <CommandPalette />
             <div>
                <h1 className={'text-2xl lg:text-4xl font-bold'}>👋 Hi, {session?.user?.name}!</h1>
                <div>This is your dashboard.</div>
