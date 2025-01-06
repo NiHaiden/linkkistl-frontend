@@ -53,7 +53,7 @@ export default function AddLinkTextbox({ refetch }: AddLinkTextboxProps) {
    return (
       <div className="space-y-4">
          <Textarea
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             rows={4}
             value={url}
             onChange={(e) => setUrl(e.target.value)}

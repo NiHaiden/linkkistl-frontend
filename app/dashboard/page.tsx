@@ -23,7 +23,7 @@ export default async function Page() {
       });
    }
 
-   const response2 = await fetch('http://localhost:8080/api/v1/links/count', {
+   const response2 = await fetch(`${process.env.API_SERVER}/api/v1/links/count`, {
       method: 'GET',
       headers: {
          'Content-Type': 'application/json',

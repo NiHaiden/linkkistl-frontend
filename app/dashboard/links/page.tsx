@@ -44,7 +44,7 @@ export default function AllLinks() {
                      <button className={'cursor-pointer'} onClick={(e) => {
                         e.preventDefault();
                         console.log(link.linkId);
-                        router.push(`/dashboard/links?linkId=${link.linkId}`);
+                        router.replace(`/dashboard/links?linkId=${link.linkId}`);
                      }} key={link.linkId}>
                         <Card key={link.linkId}
                               className={`${isSelected(link.linkId!) ? 'border-blue-400' : ''}`}>
