@@ -1,10 +1,9 @@
 'use client';
 
 import * as React from 'react';
-import { Calculator, CreditCard, Home, Link, Settings, Smile, User } from 'lucide-react';
+import { CreditCard, Home, Link, Settings, User } from 'lucide-react';
 
 import {
-   Command,
    CommandDialog,
    CommandEmpty,
    CommandGroup,
@@ -16,7 +15,6 @@ import {
 } from '@/components/ui/command';
 import { AddLinkDialog } from './add-link-dialog';
 import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { DialogTitle } from '@/components/ui/dialog';
 
 export function CommandPalette() {

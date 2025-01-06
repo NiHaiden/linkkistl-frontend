@@ -1,72 +1,32 @@
 'use client';
 
 import * as React from 'react';
+import { ReactNode } from 'react';
 import {
-   ArrowDown,
-   ArrowUp,
-   ArrowUpRight,
    AudioWaveform,
-   Bell,
    Blocks,
    Calendar,
-   ChevronRight,
    Command,
-   Copy,
-   CornerUpLeft,
-   CornerUpRight,
-   FileText,
-   GalleryVerticalEnd,
    Home,
    Inbox,
-   LineChart,
-   Link,
    type LucideIcon,
    MessageCircleQuestion,
-   MoreHorizontal,
-   Plus,
-   Search,
-   Settings2,
-   Sparkles,
-   Star,
-   StarOff,
-   Trash,
    Trash2,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import {
-   DropdownMenu,
-   DropdownMenuContent,
-   DropdownMenuItem,
-   DropdownMenuSeparator,
-   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
    Sidebar,
    SidebarContent,
    SidebarGroup,
    SidebarGroupContent,
-   SidebarGroupLabel,
    SidebarHeader,
    SidebarInset,
    SidebarMenu,
-   SidebarMenuAction,
-   SidebarMenuBadge,
    SidebarMenuButton,
    SidebarMenuItem,
-   SidebarMenuSub,
-   SidebarMenuSubButton,
-   SidebarMenuSubItem,
    SidebarProvider,
    SidebarRail,
-   SidebarTrigger,
-   useSidebar,
 } from '@/components/ui/sidebar';
-import { useSession } from 'next-auth/react';
 import { AnimatedSettingsIcon } from '@/components/icons/animated-settings';
-import { ReactNode } from 'react';
-import CommandPaletteButton from '@/components/command-palette-button';
 import { CommandPalette } from '@/components/command-palette';
 // This is sample data.
 const data = {
@@ -180,68 +140,6 @@ const data = {
          emoji: '✅',
       },
    ],
-   actions: [
-      [
-         {
-            label: 'Customize Page',
-            icon: Settings2,
-         },
-         {
-            label: 'Turn into wiki',
-            icon: FileText,
-         },
-      ],
-      [
-         {
-            label: 'Copy Link',
-            icon: Link,
-         },
-         {
-            label: 'Duplicate',
-            icon: Copy,
-         },
-         {
-            label: 'Move to',
-            icon: CornerUpRight,
-         },
-         {
-            label: 'Move to Trash',
-            icon: Trash2,
-         },
-      ],
-      [
-         {
-            label: 'Undo',
-            icon: CornerUpLeft,
-         },
-         {
-            label: 'View analytics',
-            icon: LineChart,
-         },
-         {
-            label: 'Version History',
-            icon: GalleryVerticalEnd,
-         },
-         {
-            label: 'Show delete pages',
-            icon: Trash,
-         },
-         {
-            label: 'Notifications',
-            icon: Bell,
-         },
-      ],
-      [
-         {
-            label: 'Import',
-            icon: ArrowUp,
-         },
-         {
-            label: 'Export',
-            icon: ArrowDown,
-         },
-      ],
-   ],
 };
 
 export default function SidebarPage({ children }: { children: ReactNode }) {
@@ -249,9 +147,9 @@ export default function SidebarPage({ children }: { children: ReactNode }) {
       <SidebarProvider>
          <AppSidebar />
          <SidebarInset>
-            
+
             <div className="flex flex-1 flex-col p-4">
-               <div className={'flex flex-grow flex-col items-start'}>{children}</div>
+               <div className={'flex flex-grow flex-col items-start min-h-dvh'}>{children}</div>
             </div>
          </SidebarInset>
       </SidebarProvider>
@@ -265,7 +163,8 @@ function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <NavMain items={data.navMain} />
          </SidebarHeader>
          <SidebarContent>
-
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/*@ts-expect-error*/}
             <NavSecondary items={data.navSecondary} className="mt-auto" />
          </SidebarContent>
          <SidebarRail />
@@ -273,7 +172,7 @@ function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
    );
 }
 
-function NavActions({
+/*function NavActions({
                        actions,
                     }: {
    actions: {
@@ -333,7 +232,7 @@ function NavActions({
          </Popover>
       </div>
    );
-}
+}*/
 
 function NavMain({
                     items,
@@ -360,7 +259,7 @@ function NavMain({
          <SidebarMenuItem>
             <SidebarMenuButton>
                <Command />
-               <CommandPalette/>
+               <CommandPalette />
             </SidebarMenuButton>
          </SidebarMenuItem>
       </SidebarMenu>
@@ -375,7 +274,6 @@ function NavSecondary({
       title: string
       url: string
       icon: LucideIcon
-      badge?: React.ReactNode
    }[]
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
    return (
@@ -390,7 +288,6 @@ function NavSecondary({
                            <span>{item.title}</span>
                         </a>
                      </SidebarMenuButton>
-                     {item.badge && <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>}
                   </SidebarMenuItem>
                ))}
             </SidebarMenu>
@@ -399,7 +296,7 @@ function NavSecondary({
    );
 }
 
-function NavWorkspaces({
+/*function NavWorkspaces({
                           workspaces,
                        }: {
    workspaces: {
@@ -463,4 +360,4 @@ function NavWorkspaces({
          </SidebarGroupContent>
       </SidebarGroup>
    );
-}
+}*/

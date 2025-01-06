@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -23,7 +23,7 @@ export function AddLinkDialog({ isOpen, onClose, onSubmit }: AddLinkDialogProps)
       try {
          new URL(string);
          return true;
-      } catch (_) {
+      } catch {
          return false;
       }
    };

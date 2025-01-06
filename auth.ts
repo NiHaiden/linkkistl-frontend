@@ -1,4 +1,4 @@
-import NextAuth, { Session } from 'next-auth';
+import NextAuth from 'next-auth';
 import Keycloak from 'next-auth/providers/keycloak';
 
 export const { handlers, signOut, auth, signIn } = NextAuth({
@@ -21,37 +21,43 @@ export const { handlers, signOut, auth, signIn } = NextAuth({
                expiresAt: Math.floor(Date.now() / 1000 + account.expires_in),
                refreshToken: account.refresh_token,
             };
-         } else if (Date.now() / 1000 < token.expiresAt) {
-            return token;
-         } else {
-            if (!token.refreshToken) throw new Error('Missing refresh token');
-
-            try {
-               const response = await fetch(`${process.env.AUTH_KEYCLOAK_ISSUER}/protocol/openid-connect/token`, {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                  body: new URLSearchParams({
-                     client_id: process.env.AUTH_KEYCLOAK_ID ? process.env.AUTH_KEYCLOAK_ID : '',
-                     client_secret: process.env.AUTH_KEYCLOAK_SECRET ? process.env.AUTH_KEYCLOAK_SECRET : '',
-                     grant_type: 'refresh_token',
-                     refresh_token: token.refreshToken,
-                  }),
-               });
-
-               const newTokens = await response.json();
-
-               if (!response.ok) throw newTokens;
-
-               return {
-                  ...token,
-                  accessToken: newTokens.access_token,
-                  idToken: newTokens.id_token || token.idToken,
-                  expiresAt: Math.floor(Date.now() / 1000 + newTokens.expires_in),
-                  refreshToken: newTokens.refresh_token || token.refreshToken,
-               };
-            } catch (error: unknown) {
-               token.error = 'RefreshTokenError';
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+         } else { // @ts-expect-error
+            if (Date.now() / 1000 < token.expiresAt) {
                return token;
+            } else {
+               if (!token.refreshToken) throw new Error('Missing refresh token');
+
+               try {
+                  const response = await fetch(`${process.env.AUTH_KEYCLOAK_ISSUER}/protocol/openid-connect/token`, {
+                     method: 'POST',
+                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                     //@ts-expect-error
+                     body: new URLSearchParams({
+                        client_id: process.env.AUTH_KEYCLOAK_ID ? process.env.AUTH_KEYCLOAK_ID : '',
+                        client_secret: process.env.AUTH_KEYCLOAK_SECRET ? process.env.AUTH_KEYCLOAK_SECRET : '',
+                        grant_type: 'refresh_token',
+                        refresh_token: token.refreshToken,
+                     }),
+                  });
+
+                  const newTokens = await response.json();
+
+                  if (!response.ok) throw newTokens;
+
+                  return {
+                     ...token,
+                     accessToken: newTokens.access_token,
+                     idToken: newTokens.id_token || token.idToken,
+                     expiresAt: Math.floor(Date.now() / 1000 + newTokens.expires_in),
+                     refreshToken: newTokens.refresh_token || token.refreshToken,
+                  };
+               } catch (error: unknown) {
+                  console.error(error);
+                  token.error = 'RefreshTokenError';
+                  return token;
+               }
             }
          }
       },
@@ -65,10 +71,14 @@ export const { handlers, signOut, auth, signIn } = NextAuth({
          }
 
          if (token?.accessToken) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             session.accessToken = token.accessToken;
          }
 
          if (token?.idToken) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             session.idToken = token.idToken;
          }
 

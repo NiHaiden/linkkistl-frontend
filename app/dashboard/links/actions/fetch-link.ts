@@ -4,11 +4,10 @@
 import { auth } from '@/auth';
 import { SavedLinkResponse } from '@/lib/types/saved-link-response';
 
-export default async function fetchLinks(): Promise<SavedLinkResponse[] | undefined> {
+export default async function fetchLink(linkId: string): Promise<SavedLinkResponse | undefined> {
    const session = await auth();
-   console.log(session?.accessToken);
 
-   const response = await fetch(`${process.env.API_SERVER}/api/v1/links`, {
+   const response = await fetch(`${process.env.API_SERVER}/api/v1/links/${linkId}`, {
       method: 'GET',
       headers: {
          'Content-Type': 'application/json',
